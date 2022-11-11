@@ -1,8 +1,6 @@
 const { Router } = require("express");
 const { User } = require("../models/User");
-const app = express()
-const port = 3000
-const { userRouter } = require("./routes");
+const  userRouter  = Router()
 
 
 userRouter.get("/users", async (req, res) => {
@@ -14,7 +12,8 @@ userRouter.get("/users/:userId", async (req, res) => {
 })
 
 userRouter.get("/users/:userId/shows", async (req, res) => {
-    res.send(await User(req.params.userId))
+    
+    res.send(await User())
 })
 
 userRouter.put("/users/:userId/shows", (req, res) => {
@@ -25,11 +24,5 @@ userRouter.put("/users/:userId/shows", (req, res) => {
 
 
 
-app.listen(port, () => {
-    console.log(`Listening on prot ${port}`)
-})
 
-
-
-
-module.exports = {app, userRouter };
+module.exports = { userRouter };

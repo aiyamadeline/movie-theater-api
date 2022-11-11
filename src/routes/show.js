@@ -1,8 +1,6 @@
 const { Router } = require("express")
 const { Show } = require("../models/Show");
-const app = express()
-const port = 3000
-const { showRouter } = require("./routes");
+const  showRouter  = Router();
 
 
 showRouter.get("/shows", async (req, res) => {
@@ -18,7 +16,7 @@ showRouter.get("/shows/:genres/genre", async (req, res) => {
 })
 
 showRouter.put("/shows/:showId/watched", (req, res) => {
-    res.send(Show)
+    res.send(req.body)
 })
 
 showRouter.put("/shows/:showId/update", (req, res) => {
@@ -31,11 +29,8 @@ showRouter.delete("/shows/", (req, res) => {
 
 
 
-app.listen(port, () => {
-    console.log(`Listening on prot ${port}`)
-})
 
 
 
 
-module.exports = {app, showRouter};
+module.exports = { showRouter };
