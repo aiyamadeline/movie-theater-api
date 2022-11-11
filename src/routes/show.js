@@ -3,15 +3,15 @@ const { Show } = require("../models/Show");
 const  showRouter  = Router();
 
 
-showRouter.get("/shows", async (req, res) => {
+showRouter.get("/", async (req, res) => {
     res.send(await Show.findAll())
 })
 
-showRouter.get("/shows/:showId", async (req, res) => {
-    res.send(await Show.findOne())
+showRouter.get("/:showId", async (req, res) => {
+    res.send(await Show.findByPk(req.params.showId))
 })
 
-showRouter.get("/shows/:genres/genre", async (req, res) => {
+showRouter.get("/:genre", async (req, res) => {
     res.send(await Show(req.params.genre))
 })
 

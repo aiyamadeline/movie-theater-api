@@ -3,26 +3,35 @@ const { User } = require("../models/User");
 const  userRouter  = Router()
 
 
-userRouter.get("/users", async (req, res) => {
+
+
+userRouter.get("/", async (req, res) => {
     res.send(await User.findAll())
 })
 
-userRouter.get("/users/:userId", async (req, res) => {
-    res.send(await User.findOne())
+userRouter.get("/:userId", async (req, res) => {
+    res.send(await User.findByPk(req.params.userId))
 })
 
-userRouter.get("/users/:userId/shows", async (req, res) => {
+userRouter.get("/:inputId/shows", async (req, res) => {
+    res.send(await Show.findAll({where:{userid: req.params.inputId}}))
+    });
     
-    res.send(await User())
-})
 
-userRouter.put("/users/:userId/shows", (req, res) => {
+userRouter.put("/:userId/shows", (req, res) => {
     res.send()
 })
 
+userRouter.delete("/:userId", async (req, res) => {
+    const user = await User.findByPk(req.params.userId)
+    await user.destroy()
+    res.sendStatus(204)
+})
 
 
 
 
 
-module.exports = { userRouter };
+
+
+module.exports = { userRouter }
